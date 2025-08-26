@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday River 🎂</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 18px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      background: #fff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+      font-weight: bold;
+      transition: all 0.2s ease;
+    }
+
+    .tab:hover { background: #ffe4c4; }
+    .tab.active { background: #ff6f61; color: white; }
+
+    .message {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      max-width: 500px;
+      margin: auto;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .balloons {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 80px;
+      background: red;
+      border-radius: 50% 50% 50% 50%;
+      animation: float 10s linear infinite;
+    }
+
+    .balloon:before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 60px;
+      background: #555;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-120vh) rotate(20deg); }
+    }
+
+    /* Form styling */
+    .form-container {
+      margin: 30px auto;
+      max-width: 500px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button.submit-btn {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    button.submit-btn:hover {
+      background: #e85c4a;
+    }
+
+    .extra-messages {
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .extra-messages p {
+      background: #f7f7f7;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 6px 0;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Happy Birthday, River! 🎂</h1>
+  <p class="subtitle">Select a name to see their birthday wishes for River 💌</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showMessage('river', event)">River</button>
+    <button class="tab" onclick="showMessage('neo', event)">Neo</button>
+    <button class="tab" onclick="showMessage('cleo', event)">Cleo</button>
+    <button class="tab" onclick="showMessage('immanuel', event)">Immanuel</button>
+  </div>
+
+  <div id="messageBox" class="message">
+    Today is your special day, River! 🎂 May it be filled with joy, laughter, and love from all of us. 💖
+  </div>
+
+  <!-- Form to add wishes -->
+  <div class="form-container">
+    <h3>💌 Write Your Own Wish for River</h3>
+    <input type="text" id="nameInput" placeholder="Your Name" required>
+    <textarea id="wishInput" rows="3" placeholder="Write your birthday wish..." required></textarea>
+    <button class="submit-btn" onclick="addWish()">Submit Wish</button>
+    <div class="extra-messages" id="extraMessages"></div>
+  </div>
+
+  <div class="balloons">
+    <div class="balloon" style="left:20%; background:#ff6f61; animation-duration:9s;"></div>
+    <div class="balloon" style="left:40%; background:#f7d794; animation-duration:11s;"></div>
+    <div class="balloon" style="left:60%; background:#34ace0; animation-duration:10s;"></div>
+    <div class="balloon" style="left:80%; background:#33d9b2; animation-duration:12s;"></div>
+  </div>
+
+  <script>
+    const messages = {
+      river: "Today is your special day, River! 🎂 May it be filled with joy, laughter, and love from all of us. 💖",
+      neo: "Hey River! 🎉 Wishing you the most amazing birthday ever. May your year be full of blessings, adventures, and happiness. – Neo",
+      cleo: "River, happy birthday! 🥳 May your day sparkle with laughter and joy. You deserve all the good things life can bring. – Cleo",
+      immanuel: "Happy Birthday, River! 🎂 Stay blessed, stay awesome, and keep shining like the star you are. – Immanuel"
+    };
+
+    function showMessage(name, event) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('messageBox').textContent = messages[name];
+    }
+
+    function addWish() {
+      const name = document.getElementById('nameInput').value.trim();
+      const wish = document.getElementById('wishInput').value.trim();
+      if (name && wish) {
+        const msgDiv = document.getElementById('extraMessages');
+        const p = document.createElement('p');
+        p.textContent = `${name} says: "${wish}"`;
+        msgDiv.appendChild(p);
+        document.getElementById('nameInput').value = '';
+        document.getElementById('wishInput').value = '';
+      } else {
+        alert("Please enter both your name and a wish!");
+      }
+    }
+
+    // 🎊 Confetti
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.style.position = 'fixed';
+      confetti.style.width = '10px';
+      confetti.style.height = '10px';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.top = '-10px';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.opacity = Math.random();
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confetti.style.pointerEvents = 'none';
+      confetti.style.animation = `fall ${3 + Math.random() * 2}s linear forwards`;
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 5000);
+    }
+    setInterval(createConfetti, 200);
+
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }`;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
